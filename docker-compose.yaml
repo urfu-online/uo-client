@@ -19,7 +19,8 @@ services:
       - CHOKIDAR_USEPOLLING=true
       - NODE_ENV=${NODE_ENV}
     networks:
-      - client-network  
+      - client-network
+    restart: unless-stopped
 
 networks:
   client-network:
