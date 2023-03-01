@@ -1,0 +1,26 @@
+version: '3.7'
+
+services:
+  client:
+    env_file:
+      - .env
+    image: ${PROJECT_NAME}-client-${NODE_ENV}
+    container_name: client
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - '.:/app'
+      - /app/node_modules
+    ports:
+      - ${WEB_PORT}:3000
+    stdin_open: true
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - NODE_ENV=${NODE_ENV}
+    networks:
+      - client-network  
+
+networks:
+  client-network:
+    driver: bridge
