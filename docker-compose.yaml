@@ -15,9 +15,6 @@ services:
     ports:
       - ${WEB_PORT}:3000
     stdin_open: true
-    environment:
-      - CHOKIDAR_USEPOLLING=true
-      - NODE_ENV=${NODE_ENV}
     networks:
       - client-network
     restart: unless-stopped

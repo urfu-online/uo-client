@@ -1,7 +1,7 @@
 FROM node:18-alpine as system_base
 
 ARG NODE_ENV
-ENV NODE_ENV production
+ENV NODE_ENV=${NODE_ENV}
 
 RUN apk update && apk upgrade && apk add --no-cache --update bash dumb-init
 
@@ -15,9 +15,7 @@ WORKDIR /app
 
 COPY package.json package-lock.json* ./
 
-RUN npm install -g npm
 RUN [[ "${NODE_ENV}" == "production" ]] && npm ci --only=production || npm install
-
 
 ENV PATH /app/node_modules/.bin:$PATH
 
